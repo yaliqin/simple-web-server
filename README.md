@@ -1,0 +1,1 @@
+This is a simple web server that provides RESTful API access. 

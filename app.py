@@ -18,4 +18,4 @@ def get_answer():
 
 
 if __name__ == '__main__':
-    app.run(port=6868)
+    app.run(host='0.0.0.0', port=6868)

@@ -49,5 +49,5 @@ sudo docker run --name webserver -td -p 3389:80 <Your DockerHub user ID>/restapi
 ```
 ### 4. Use command to test model server
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{"question": <input your question here>}' http://<VM instance>:3389/answer
+curl -i -X POST -H 'Content-Type: application/json' -d '{"question": <input your question here>}' http://<VM instance IP>:3389/answer
 ```

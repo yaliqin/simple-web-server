@@ -51,3 +51,21 @@ sudo docker run --name webserver -td -p 3389:80 <Your DockerHub user ID>/restapi
 ```
 curl -i -X POST -H 'Content-Type: application/json' -d '{"question": <input your question here>}' http://<VM instance IP>:3389/answer
 ```
+### 5. Use UI to test model server
+Log in to chatbot-control-plane VM instance on GCP, and update service urls in `/chatbot/mount/config.yaml`.
+Below is an example of the config file. Currently, only the url of Knowledge Graph(KG) is filled. 
+```yaml
+# change the ip in <>, if necessary
+KG_URL: 'http://<35.236.30.207>:3389/answer'
+BILSTM_URL: ''
+DAM_URL: ''
+```
+### 6. Update the frontend config file 
+Config file is under `chatbot-frontend/src/helpers/config.js` in the BetterChatbot project.
+```python
+let SERVER=
+# It's the url of chatbot-control-plane VM. Please DO NOT change it.
+{ROOT_URL:'http://35.230.9.250:3389/'}
+export default SERVER;
+```
+### 7. Run frontend and test

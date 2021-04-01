@@ -83,7 +83,7 @@ def test(conf, _model, predict_data):
     # load data
     print('starting loading predict data')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
-    print(predict_data['c'][:10], predict_data['r'][:10])
+    # print(predict_data['c'][:10], predict_data['r'][:10])
     print('finish loading data')
 
     test_batches = reader.build_batches(predict_data, conf)

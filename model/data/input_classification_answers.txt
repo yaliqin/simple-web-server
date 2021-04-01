@@ -1,0 +1,30 @@
+Move mouse over the node. Right click on it and option to delete the node will be displayed.
+Yes. You can upload a JSON file.
+The tree should have only three levels. There is no limit on the number of nodes and child nodes. Higher the nodes more number of test cases will be generated.
+Sorry, we don’t have that option. But you can create a new node.
+Sorry, we use JSON file to generate testing cases.
+Yes, no problem.
+You need to go navigation: Login -> Get Started-> Data Administration with graph. Move mouse over the node.Right click on it and option to delete the node will be displayed.
+No, Thanks for your help.
+Yes, no problem.
+Go to  Login → Get Started → DATA ADMINISTRATION WITH GRAPH Select tree/file from dropdown list. Tree will be displayed.
+Sorry, we don't support this option. But you can upload your own JSON input classficiaction file.
+The tree should have only three levels. There is no limit on the number of nodes and child nodes. Higher the nodes more no of test cases will be generated.So if possible create trees with key values.
+Move mouse over the node. Right click on it and option to delete the node will be displayed.
+Move mouse over the node. Right click on it and option to delete the node will be displayed.
+Sure. You can upload your own tree by using JSON file.
+The tree should have only three levels. There is no limit on the number of nodes and child nodes. Higher the nodes more number of test cases will be generated.
+Sure. Navigation : Login → Get Started → DATA ADMINISTRATION WITH GRAPH Move mouse over the node.Right click on it and option to delete the node will be displayed
+Sorry, we don't have that option.
+The tree should have only three levels. There is no limit on the number of nodes and child nodes. Higher the nodes more no of test cases will be generated.So if possible create trees with key values.
+No.
+You can try Navigation : Login → Get Started → DATA ADMINISTRATION WITH GRAPH Move mouse over the node.Right click on it and option to delete the node will be displayed.
+Yes, Thank you very much.
+Right now, we only accept JSON file.
+Sure, Navigation : Login → Get Started → DATA ADMINISTRATION WITH GRAPH  Move mouse over the node.Right click on it and option to delete the node will be displayed
+The tree should have only three levels.
+There are two methods: Go to Login → Get Started → DATA ADMINISTRATION WITH GRAPH Move the mouse over the node.Right click on it and select   1. “Create Child Node” option.A popup window will open. There is a plus(+) symbol on the popup window. With this you can add as many nodes required,then click create to add nodes to the tree. OR’ 2. “Create 5 Nodes” option to add five child nodes with default names. Then select the node to rename with appropriate values
+No.
+There is no limit on the number of nodes and child nodes. Higher the nodes more no of test cases will be generated.So if possible create trees with key values.
+You can go to Login → Get Started → DATA ADMINISTRATION, select file type (input, context or output) then click submit.
+Then you can 1.Select appropriate test case group 2.Scroll to right till you see the Action column 3.Hover over each action button to see the description 4.Click “View Test Cases” 5.User will be redirected to input test cases

@@ -1,0 +1,50 @@
+You can find the contact information in the webpage
+Please  click the ‘CONTACT’ button in the left panel
+Please contact the administrator for that
+Yes. Please click the ‘CONTACT’ button in the left panel to contact the administrator
+We will add the feature in future
+We will add the feature in future
+No. Only functional tests can be done
+Not really
+Yes. We plan to support it in later version
+No
+It is not decided yet
+We have no plan for it yet
+Understand
+We will consider the schedule function
+Sorry, we don’t have this option.
+Sorry, we don't have this option right now. If you have more question, please contact admin.
+Yes, you can go to Login-> Get Started -> TEST CASE GROUP, then select appropriate test case group, scroll to right till you see the action column. Hover over each action button to see the description, click ‘View Test Cases’. Then you will be redirected to input test cases. Did I solve your problem?
+Go to Login → Get Started → DATA ADMINISTRATION WITH GRAPH Select tree/file from dropdown list. Click Delete.
+Thanks for your help.
+Navigation : Login → Get Started → DATA ADMINISTRATION WITH GRAPH Move mouse over the node.Right click on it and option to delete the node will be displayed
+We only accept JSON file. You can go Go to Login → Get Started → DATA ADMINISTRATION 1. Select JSON File 2. Select File Type (Input,Context or Output) 3. Click submit.
+Sure. You can uplaod your own JSON file.
+“Create Child Node” option. A popup window will open. There is a plus(+) symbol on the popup window. With this you can add as many nodes required,then click create to add nodes to the tree.
+“Create 5 Nodes” option to add five child nodes with default names. Then select the node to rename with appropriate values
+There is no such limitationn.
+There is no nodes limitationn.
+Our system doesn't have nodes limitationn.
+Our system doesn't provide recovery.
+Delete action is hard delete. I.e., you cannot view the test case once deleted.
+No, delete action is hard delete.
+No. Currently we do not have this facility.
+I am sorry. Users are not allowed to do that directly. Nodes and child Nodes are sorted based on name (A-Z) after each action (add, delete and rename).
+Actually, there is no restrictions. However, more nodes will take more time to generate test cases and modeling inputs.
+No problem. Just let you know, when you rename a node, the order of nodes will be automatically sorted by new name (A-Z).
+3. Double click near the tree to zoom-in.
+Not exactly. The same directory stays open only if you only use this app.
+Exactly. The operation is the same.
+Mouse hovers on a node and right click, then the option list will appear.
+There is no limit. You can add child nodes as needed. 
+Sorry, now we only support adding category names to each node.
+There is no limit to the number of child nodes.
+Thanks for your suggestion. We'll think about it.
+You can find the contact information in the webpage.
+Please click the ‘CONTACT’ button in the left panel.
+Please contact the administrator for that.
+Yes. Please click the ‘CONTACT’ button in the left panel to contact the administrator.
+We will add the feature in future.
+We will add the feature in future.
+Yes. We plan to support it in later version.
+No

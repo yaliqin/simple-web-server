@@ -1,4 +1,4 @@
-from model.model import model_interface
+from model.DAM import model_interface
 from flask import Flask
 from flask import request, jsonify
 

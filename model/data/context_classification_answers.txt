@@ -1,0 +1,42 @@
+Generating Test Cases based on provided input and the context trees. With this feature, users can generate test cases for all the combination for the respective input and context trees
+In Input tree modeling we are defining the factors which need to be considered while testing a certain product.  We use this tree while defining the test case group and to generate the test cases Test Case Input modeling refers to Data/Input Data required for the test case. In this module, we are providing the user ability to add input data to the test case either manually or with the help of a web search engine
+It’s used to copy the whole content of current version for producing a new version by modification
+Copy tree is to copy the version
+Let me check
+No, one user can’t login with multiple browser.
+There is no plan yet
+We plan to do that later
+You can go to Login → Get Started → DATA ADMINISTRATION, select file type (input, context or output) then click submit.
+Users can create an output tree or output tree can be generated automatically based on the input and context tree. Once the “test case group” is created, users can edit input,context and output trees.
+Once the “test case group” is created, users can edit input,context and output trees. Basically, you can generate the test case group first and then edit the information.
+The output tree can be auto generated or the user can manually create the tree. User can manipulate this output tree to model the expected output.
+The output tree can be auto generated or the user can manually create the tree.
+Expected output is generated from output tree and stored as tree (similar to the input and context tree).
+Expected output is generated from the output tree once “generate test cases” action triggered. If this action is interrupted then test case generation will be terminated.
+Unfortunately no. If user deleted input/context test case then user will need to retrigger the generate test case action.
+Yes, you do need to do that.
+In the child node user can put all the possible output strings or output tree can be generated automatically based on the input and context tree.
+1. Click view test case action 2. Select input test case and click view test case action  to see context test case 3. Click on the “Expected Output” or “Application Output” column  to view the output respectively
+Yes. You can generate different expected output tree for same input and context group.
+For example, the image is about a dog. The dog's posture, orientation and surounding backgroud can be regarded as context. 
+Yep! Each node in the context tree stands for a context feature you designed. Besides, just let you know, you can enter subnodes as subfeatures as well.
+Yes, you are right! So far, our context tree only supports 3 levels. When designing the context tree, be careful to the level restriction.
+You can modify it offline and then upload the modified file, or modify online in the workspace and save the updated version.
+Great question! The greater the number of nodes, the more test cases will be generated and the longer it will take. So if possible create a tree with necessary key values.
+There is no limit to the number of subfeatures you can add. But be careful, our context tree design only supports up to 3 levels.
+Navigation : Login → Get Started → DATA ADMINISTRATION WITH GRAPH. Hover mouse on the target node, and right click. You'll see the corresponding options.
+I am sorry, the answer is YES.
+Go to  Login → Get Started → DATA ADMINISTRATION WITH GRAPH. Select tree/file from dropdown list.
+Sure.There is a plus(+) symbol on the popup window. With this you can add as many nodes required, then click create to add nodes to the tree.
+Go to  Login → Get Started → DATA ADMINISTRATION WITH GRAPH. Drag and rearrange nodes feature is available . 
+Sure. But don't forget to save your changes.
+At this stage, our application does not support multiple context trees in a file. A file only contains a tree.
+JSON. You should build your context tree as a json file.
+Yes, that's one way. Another way is to modify the json file directly.
+The more nodes, the more test cases will be generated. It will take a looooong time. So if possible delete some redundant nodes and just retain the key ones.
+Mouse hovers on a node and right click. Then you will see the delete option.
+Sorry, if the network connection is lost, we will not be able to recover what you created. Try to save the file often.
+Mouse scroll to zoom-in and zoom-out the tree, or click and hold to move tree around.
+There is no limit to the number of nodes in the context tree, but you can only have one root.
+You can merge the two tree files offline. And then upload the merged JSON file.
+Sorry, now we don't have this function.

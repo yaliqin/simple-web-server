@@ -18,7 +18,7 @@ sys.path.append("../../")
 home_folder = "/home/ally/github/chatbot/"
 result_path = home_folder+"models/DAM/results/"
 data_path = current_dir+"/data/"
-model_folder = home_folder+"models/DAM/results/"
+model_folder = current_dir+"/saved_model/"
 
 # data_path =  home_folder+"data/"
 conf = {
@@ -76,7 +76,7 @@ def prepare_data(data_path):
             question_text.append((blocks[1:-1]))
             positive_corpus.append(item)
     cls_indexs, question_text, answers_text = generate_data.get_subset_answers(data_path)
-    print(cls_indexs)
+    # print(cls_indexs)
     return cls_indexs, question_text, answers_text,word_dict
 
 
@@ -92,7 +92,7 @@ def prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,wor
         #    print(positive_answer[0])
         for item in negative_answers:
             all_data.append(item)
-        print(all_data)
+        # print(all_data)
     text_data_classified = preprocessor.get_sequence_tokens_with_turn(all_data, word_dict)
     indexs, answers = predict.test(conf, model, text_data_classified)
     print(indexs)

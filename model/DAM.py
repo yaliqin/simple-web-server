@@ -18,6 +18,7 @@ sys.path.append("../../")
 home_folder = "/home/ally/github/chatbot/"
 result_path = home_folder+"models/DAM/results/"
 data_path = current_dir+"/data/"
+model_folder = home_folder+"models/DAM/results/"
 
 # data_path =  home_folder+"data/"
 conf = {
@@ -30,8 +31,8 @@ conf = {
     "save_path": result_path,
     #"init_model":"/home/ally/DAM/output/ubuntu/DAM/DAM.ckpt",
     #"init_meta":"/home/ally/DAM/output/ubuntu/DAM/DAM.ckpt.meta",
-    "init_model":result_path+"model.ckpt.21.0", # for local machine test
-    "init_meta":result_path+"model.ckpt.21.0.meta",
+    "init_model":model_folder+"model.ckpt.21.0", # for local machine test
+    "init_meta":model_folder+"model.ckpt.21.0.meta",
 
     "rand_seed": None,
 

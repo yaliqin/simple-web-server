@@ -8,7 +8,7 @@ from os.path import dirname, abspath
 current_dir = dirname((abspath(__file__)))
 
 
-from .utils import net, predict, preprocessor,generate_data
+from utils import net, predict, preprocessor,generate_data
 
 
 
@@ -155,6 +155,7 @@ def dam_output(input,SINGLEMODEL):
         cls_indexs, question_text, answers_text,word_dict = prepare_data(data_path)
         for number, question in enumerate(question_text):
             if question == input:
+                print(input)
                 break
         question_number = [number]
         indexs,all_data = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list,model)
@@ -175,4 +176,5 @@ def dam_output(input,SINGLEMODEL):
 if __name__ == '__main__':
     test_cls_indexs, test_question_text, test_answers_text, word_dict = prepare_data(data_path)
     question = test_question_text[22]
+    print(question)
     model_interface(question)

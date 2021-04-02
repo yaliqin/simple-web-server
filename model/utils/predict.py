@@ -75,7 +75,9 @@ def evaluate_result(data):
 #    return(max_score_indexs,proposed_answer)
     return max_score_indexs, prop_answers
 
-def test_with_model(conf, _model, _graph,sess, predict_data):
+
+
+def test_with_model(conf, _model, _graph, predict_data):
     if not os.path.exists(conf['save_path']):
         os.makedirs(conf['save_path'])
 
@@ -103,6 +105,7 @@ def test_with_model(conf, _model, _graph,sess, predict_data):
 
     print('starting test')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    sess=tf.Session()
     for batch_index in range(test_batch_num):
         print(f"batch index is: {batch_index}")
         feed = {
@@ -130,10 +133,7 @@ def test_with_model(conf, _model, _graph,sess, predict_data):
         for line in infile:
             tokens = line.strip().split('\t')
             score_data.append((float(tokens[0]), tokens[1:]))
-    # print("score data for sorting")
-    # for item in score_data:
-    #    print(item)
-    # write evaluation result
+
     index, result = evaluate_result(score_data)
     return index, result
 

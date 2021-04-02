@@ -66,14 +66,15 @@ def load_model():
     print('build graph sucess')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
-    with tf.compat.v1.Session(graph=graph) as sess:
-        # _model.init.run();
-        # _model.saver = tf.train.import_meta_graph("init_meta")
-        model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
-        print(model.saver)
-        model.saver.restore(sess, conf["init_model"])
-        print("sucess init %s" % conf["init_model"])
-        return model,graph,sess
+    sess=tf.Session()
+    # _model.init.run();
+    # _model.saver = tf.train.import_meta_graph("init_meta")
+    model.saver = tf.train.import_meta_graph(conf["init_meta"])
+    print(model.saver)
+    model.saver.restore(sess, conf["init_model"])
+    print("sucess init %s" % conf["init_model"])
+    print(f'this is sess:{sess}')
+    return model,graph
 
 
 def prepare_data(data_path):
@@ -95,7 +96,7 @@ def prepare_data(data_path):
     return cls_indexs, question_text, answers_text,word_dict
 
 
-def prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list,model):
+def prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list):
     all_data = []
     for index in question_number:
         #    print(f'the {index} question is:{question_text[index]}')
@@ -152,14 +153,14 @@ def pop_answers(indexs,question_text,question_number,all_data):
     #
 
 
-def model_interface(input,graph,model,sess):
+def model_interface(input,graph,model):
     SINGLEMODEL = 1
-    return dam_output(input,SINGLEMODEL,graph,model,sess)
+    return dam_output(input,SINGLEMODEL,graph,model)
 
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(input,SINGLEMODEL,graph,model,sess):
+def dam_output(input,SINGLEMODEL,graph,model):
     # # define model class
     # model = net.Net(conf)
 
@@ -173,7 +174,7 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
                 break
         question_number = [number]
         all_data,text_data_classified = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list)
-        indexs, answers = predict.test_with_model(conf, graph, model, sess,text_data_classified)
+        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
         print(indexs)
         output = pop_answers(indexs,question_text,question_number,all_data)
     else:
@@ -182,7 +183,7 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
         questions = input
         q_a_set = build_bilstm_qa(questions, question_text, answers_text)
         text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
-        indexs, answers = predict.test_with_model(conf, graph, model,sess, text_data_classified)
+        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
         answer_data = q_a_set[indexs]
         this_answer = answer_data.split('\t')[-1]
         print(f'answer is: {this_answer}')

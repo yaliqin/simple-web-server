@@ -66,15 +66,15 @@ def load_model():
     print('build graph sucess')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
-    sess = tf.compat.v1.Session()
-    # _model.init.run();
-    # _model.saver = tf.train.import_meta_graph("init_meta")
-    model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
-    print(model.saver)
-    model.saver.restore(sess, conf["init_model"])
-    print("sucess init %s" % conf["init_model"])
+    with tf.compat.v1.Session(graph=graph) as sess:
+        # _model.init.run();
+        # _model.saver = tf.train.import_meta_graph("init_meta")
+        model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
+        print(model.saver)
+        model.saver.restore(sess, conf["init_model"])
+        print("sucess init %s" % conf["init_model"])
 
-    return model,graph
+        return model,graph
 
 
 def prepare_data(data_path):

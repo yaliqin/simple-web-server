@@ -1,5 +1,6 @@
-import sys
 import os
+import time
+import tensorflow as tf
 
 # disable tensorflow debug information
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -9,9 +10,6 @@ current_dir = dirname((abspath(__file__)))
 
 
 from .utils import net, predict, preprocessor,generate_data
-
-
-
 
 
 
@@ -72,7 +70,7 @@ def load_model():
         # _model.init.run();
         # _model.saver = tf.train.import_meta_graph("init_meta")
         model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
-        print(_model.saver)
+        print(model.saver)
         model.saver.restore(sess, conf["init_model"])
         print("sucess init %s" % conf["init_model"])
         return model,graph

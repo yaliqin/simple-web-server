@@ -1,5 +1,5 @@
 FROM tensorflow/tensorflow:2.4.1-gpu
-EXPOSE 80
+EXPOSE 5000
 WORKDIR /project
 ADD . /project
 RUN pip install --upgrade pip

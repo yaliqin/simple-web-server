@@ -4,7 +4,7 @@ from flask import request, jsonify
 
 app = Flask(__name__)
 
-model,graph = load_model()
+model,graph,sess = load_model()
 
 @app.route('/')
 def hello():
@@ -15,7 +15,7 @@ def hello():
 def get_answer():
     input = request.get_json()
     question = input['question']
-    return jsonify({"answer": model_interface(question,graph, model)})
+    return jsonify({"answer": model_interface(question,graph, model,sess)})
 
 
 if __name__ == '__main__':

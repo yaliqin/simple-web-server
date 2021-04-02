@@ -75,7 +75,7 @@ def evaluate_result(data):
 #    return(max_score_indexs,proposed_answer)
     return max_score_indexs, prop_answers
 
-def test_with_model(conf, _model, _graph, predict_data):
+def test_with_model(conf, _model, _graph,sess, predict_data):
     if not os.path.exists(conf['save_path']):
         os.makedirs(conf['save_path'])
 

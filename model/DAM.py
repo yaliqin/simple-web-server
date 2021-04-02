@@ -73,7 +73,7 @@ def load_model():
         print(model.saver)
         model.saver.restore(sess, conf["init_model"])
         print("sucess init %s" % conf["init_model"])
-        return model,graph
+        return model,graph,sess
 
 
 def prepare_data(data_path):
@@ -152,14 +152,14 @@ def pop_answers(indexs,question_text,question_number,all_data):
     #
 
 
-def model_interface(input,graph,model):
+def model_interface(input,graph,model,sess):
     SINGLEMODEL = 1
-    return dam_output(input,SINGLEMODEL,graph,model)
+    return dam_output(input,SINGLEMODEL,graph,model,sess)
 
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(input,SINGLEMODEL,graph,model):
+def dam_output(input,SINGLEMODEL,graph,model,sess):
     # # define model class
     # model = net.Net(conf)
 
@@ -173,7 +173,7 @@ def dam_output(input,SINGLEMODEL,graph,model):
                 break
         question_number = [number]
         all_data,text_data_classified = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list)
-        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
+        indexs, answers = predict.test_with_model(conf, graph, model, sess,text_data_classified)
         print(indexs)
         output = pop_answers(indexs,question_text,question_number,all_data)
     else:
@@ -182,7 +182,7 @@ def dam_output(input,SINGLEMODEL,graph,model):
         questions = input
         q_a_set = build_bilstm_qa(questions, question_text, answers_text)
         text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
-        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
+        indexs, answers = predict.test_with_model(conf, graph, model,sess, text_data_classified)
         answer_data = q_a_set[indexs]
         this_answer = answer_data.split('\t')[-1]
         print(f'answer is: {this_answer}')
@@ -193,5 +193,5 @@ if __name__ == '__main__':
     test_cls_indexs, test_question_text, test_answers_text, word_dict = prepare_data(data_path)
     question = test_question_text[22]
     print(question)
-    model,graph=load_model()
-    model_interface(question,model,graph)
+    model,graph,sess=load_model()
+    model_interface(question,model,graph,sess)

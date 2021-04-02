@@ -7,10 +7,11 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from os.path import dirname, abspath
 current_dir = dirname((abspath(__file__)))
 
-from utils import net, predict, preprocessor,generate_data
+
+from .utils import net, predict, preprocessor,generate_data
 
 
-sys.path.append("../../")
+
 
 
 

@@ -1,5 +1,4 @@
-
-from utils import reader, preprocessor
+from . import reader, preprocessor
 
 import sys
 sys.path.append("/home/ally/github/chatbot")

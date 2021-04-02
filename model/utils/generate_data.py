@@ -1,4 +1,4 @@
-from utils import preprocessor
+from . import preprocessor
 import pickle
 from random import sample
 

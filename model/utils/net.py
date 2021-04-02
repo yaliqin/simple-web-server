@@ -3,8 +3,9 @@ import numpy as np
 # import cPickle as pickle
 import pickle
 
-import utils.layers as layers
-import utils.operations as op
+from . import layers as layers
+from . import operations as op
+
 
 class Net(object):
     '''Add positional encoding(initializer lambda is 0),

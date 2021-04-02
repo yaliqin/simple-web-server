@@ -1,5 +1,7 @@
 import tensorflow as tf
-import utils.operations as op
+from . import operations as op
+
+
 def similarity(x, y, x_lengths, y_lengths):
     '''calculate similarity with two 3d tensor.
 

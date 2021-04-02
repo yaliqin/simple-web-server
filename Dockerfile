@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM tensorflow/tensorflow:2.4.1-gpu
 EXPOSE 80
 WORKDIR /project
 ADD . /project

@@ -8,7 +8,7 @@ from os.path import dirname, abspath
 current_dir = dirname((abspath(__file__)))
 
 
-from .utils import net, predict, preprocessor,generate_data
+from utils import net, predict, preprocessor,generate_data
 
 
 
@@ -61,6 +61,22 @@ conf = {
     "final_n_class": 1,
 }
 
+def load_model():
+    # define model class
+    model = net.Net(conf)
+    graph = model.build_graph()
+    print('build graph sucess')
+    print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+
+    with tf.compat.v1.Session(graph=graph) as sess:
+        # _model.init.run();
+        # _model.saver = tf.train.import_meta_graph("init_meta")
+        model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
+        print(_model.saver)
+        model.saver.restore(sess, conf["init_model"])
+        print("sucess init %s" % conf["init_model"])
+        return model,graph
+
 
 def prepare_data(data_path):
     data_file = data_path+"all_classified_data.txt"
@@ -95,9 +111,9 @@ def prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,wor
             all_data.append(item)
         # print(all_data)
     text_data_classified = preprocessor.get_sequence_tokens_with_turn(all_data, word_dict)
-    indexs, answers = predict.test(conf, model, text_data_classified)
-    print(indexs)
-    return indexs,all_data
+
+    return all_data,text_data_classified
+    # return indexs,all_data
 
 def find_question_answer(question, question_text,answers_text):
     for index,value in enumerate(question_text):
@@ -138,16 +154,16 @@ def pop_answers(indexs,question_text,question_number,all_data):
     #
 
 
-def model_interface(input):
+def model_interface(input,graph,model):
     SINGLEMODEL = 1
-    return dam_output(input,SINGLEMODEL)
+    return dam_output(input,SINGLEMODEL,graph,model)
 
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(input,SINGLEMODEL):
-    # define model class
-    model = net.Net(conf)
+def dam_output(input,SINGLEMODEL,graph,model):
+    # # define model class
+    # model = net.Net(conf)
 
     # if no bilstm, should work out with the proposed answer by itself; otherwise, get the proposed answers from bilstm
     if SINGLEMODEL == 1:
@@ -158,7 +174,9 @@ def dam_output(input,SINGLEMODEL):
                 print(input)
                 break
         question_number = [number]
-        indexs,all_data = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list,model)
+        all_data,text_data_classified = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list)
+        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
+        print(indexs)
         output = pop_answers(indexs,question_text,question_number,all_data)
     else:
         cls_indexs, question_text, answers_text, word_dict = prepare_data(data_path)
@@ -166,7 +184,7 @@ def dam_output(input,SINGLEMODEL):
         questions = input
         q_a_set = build_bilstm_qa(questions, question_text, answers_text)
         text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
-        indexs, answers = predict.test(conf, model, text_data_classified)
+        indexs, answers = predict.test_with_model(conf, graph, model, text_data_classified)
         answer_data = q_a_set[indexs]
         this_answer = answer_data.split('\t')[-1]
         print(f'answer is: {this_answer}')
@@ -177,4 +195,5 @@ if __name__ == '__main__':
     test_cls_indexs, test_question_text, test_answers_text, word_dict = prepare_data(data_path)
     question = test_question_text[22]
     print(question)
-    model_interface(question)
+    model,graph=load_model()
+    model_interface(question,model,graph)

@@ -1,9 +1,10 @@
-from model.DAM import model_interface
+from model.DAM import model_interface,load_model
 from flask import Flask
 from flask import request, jsonify
 
 app = Flask(__name__)
 
+model,graph = load_model()
 
 @app.route('/')
 def hello():
@@ -14,7 +15,7 @@ def hello():
 def get_answer():
     input = request.get_json()
     question = input['question']
-    return jsonify({"answer": model_interface(question)})
+    return jsonify({"answer": model_interface(question,graph, model)})
 
 
 if __name__ == '__main__':

@@ -13,7 +13,7 @@ from .utils import net, predict, preprocessor,generate_data
 
 #
 gpu_options = tf.compat.v1.GPUOptions(allow_growth=True)
-session = tf.compat.v1.Session(config=tf.compat.v1.configproto(gpu_options=gpu_options))
+session = tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(gpu_options=gpu_options))
 
 home_folder = "/home/ally/github/chatbot/"
 result_path = home_folder+"models/DAM/results/"

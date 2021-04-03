@@ -12,7 +12,8 @@ current_dir = dirname((abspath(__file__)))
 from .utils import net, predict, preprocessor,generate_data
 
 
-
+gpu_options = tf.GPUOptions(allow_growth=True)
+session = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
 home_folder = "/home/ally/github/chatbot/"
 result_path = home_folder+"models/DAM/results/"
@@ -63,7 +64,7 @@ def load_model():
     # define model class
     model = net.Net(conf)
     graph = model.build_graph()
-    print('build graph sucess')
+    print('build graph sucess during load model')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
     with tf.compat.v1.Session(graph=graph) as sess:

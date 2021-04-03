@@ -159,7 +159,7 @@ def test(conf, _model, predict_data):
     print('configurations: %s' % conf)
 
     _graph = _model.build_graph()
-    print('build graph sucess')
+    print('build graph sucess in predict.test()')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
     with tf.compat.v1.Session(graph=_graph) as sess:

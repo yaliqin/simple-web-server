@@ -11,9 +11,9 @@ current_dir = dirname((abspath(__file__)))
 
 from .utils import net, predict, preprocessor,generate_data
 
-
-gpu_options = tf.GPUOptions(allow_growth=True)
-session = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+#
+gpu_options = tf.compat.v1.GPUOptions(allow_growth=True)
+session = tf.compat.v1.Session(config=tf.compat.v1.configproto(gpu_options=gpu_options))
 
 home_folder = "/home/ally/github/chatbot/"
 result_path = home_folder+"models/DAM/results/"
@@ -67,6 +67,7 @@ def load_model():
     print('build graph sucess during load model')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
+    tf.compat.v1.disable_eager_execution()
     with tf.compat.v1.Session(graph=graph) as sess:
         # _model.init.run();
         # _model.saver = tf.train.import_meta_graph("init_meta")

@@ -105,7 +105,7 @@ def test_with_model(conf, _model, _graph, predict_data):
 
     print('starting test')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
-    with tf.compat.v1.Session(graph=graph) as sess:
+    with tf.compat.v1.Session(graph=_graph) as sess:
         for batch_index in range(test_batch_num):
             print(f"batch index is: {batch_index}")
             feed = {

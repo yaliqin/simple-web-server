@@ -74,7 +74,7 @@ def load_model():
         model.saver.restore(sess, conf["init_model"])
         print("sucess init %s" % conf["init_model"])
 
-        return model,graph
+    return model,graph
 
 
 def prepare_data(data_path):

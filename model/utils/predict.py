@@ -76,10 +76,11 @@ def evaluate_result(data):
     return max_score_indexs, prop_answers
 
 
-def test_with_model(conf, _model, _graph, predict_data):
+def test_with_model(conf, _model, _graph, sess, predict_data):
     if not os.path.exists(conf['save_path']):
         os.makedirs(conf['save_path'])
 
+    print(f'sess in test_with_mode:{sess}')
     # load data
     print('starting loading predict data')
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
@@ -114,25 +115,25 @@ def test_with_model(conf, _model, _graph, predict_data):
 #    with tf.compat.v1.get_default_session() as sess:
 #     sess = tf.compat.v1.get_default_session()
 
-    with tf.compat.v1.get_default_session() as sess:
-        for batch_index in range(test_batch_num):
-            print(f"batch index is: {batch_index}")
-            feed = {
-                _model.turns: test_batches["turns"][batch_index],
-                _model.tt_turns_len: test_batches["tt_turns_len"][batch_index],
-                _model.every_turn_len: test_batches["every_turn_len"][batch_index],
-                _model.response: test_batches["response"][batch_index],
-                _model.response_len: test_batches["response_len"][batch_index],
-                _model.label: test_batches["label"][batch_index]
-            }
+    # with tf.compat.v1.get_default_session() as sess:
+    for batch_index in range(test_batch_num):
+        print(f"batch index is: {batch_index}")
+        feed = {
+            _model.turns: test_batches["turns"][batch_index],
+            _model.tt_turns_len: test_batches["tt_turns_len"][batch_index],
+            _model.every_turn_len: test_batches["every_turn_len"][batch_index],
+            _model.response: test_batches["response"][batch_index],
+            _model.response_len: test_batches["response_len"][batch_index],
+            _model.label: test_batches["label"][batch_index]
+        }
 
-            scores = sess.run(_model.logits, feed_dict=feed)
-            print('scores are listed:')
-            print((scores))
-            for i in range(conf["batch_size"]):
-                score_file.write(str(scores[i]) + '\t' +
-                                 str(test_batches["response"][batch_index][i]) + '\n')
-                print(str(scores[i]))
+        scores = sess.run(_model.logits, feed_dict=feed)
+        print('scores are listed:')
+        print((scores))
+        for i in range(conf["batch_size"]):
+            score_file.write(str(scores[i]) + '\t' +
+                             str(test_batches["response"][batch_index][i]) + '\n')
+            print(str(scores[i]))
 
     score_file.close()
     print('finish test')

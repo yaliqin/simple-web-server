@@ -113,7 +113,7 @@ def test_with_model(conf, _model, _graph, predict_data):
 
 #    with tf.compat.v1.get_default_session() as sess:
 #     sess = tf.compat.v1.get_default_session()
-    
+
     with tf.compat.v1.get_default_session() as sess:
         for batch_index in range(test_batch_num):
             print(f"batch index is: {batch_index}")

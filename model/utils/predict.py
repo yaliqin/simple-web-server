@@ -96,7 +96,6 @@ def test_with_model(conf, _model, _graph, predict_data):
 
     print('configurations: %s' % conf)
 
-
     score_file_path = conf['save_path'] + 'score_predict.test'
     print('score file path')
     print(score_file_path)
@@ -106,8 +105,12 @@ def test_with_model(conf, _model, _graph, predict_data):
     print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
     print("\n")
+    print(type(_model))
+    print(_model)
+    print(type(_graph))
+    _graph = tf.compat.v1.get_default_graph()
     sess = tf.compat.v1.get_default_session()
-    
+
 #    with tf.compat.v1.Session(graph=_graph) as sess:
     for batch_index in range(test_batch_num):
         print(f"batch index is: {batch_index}")

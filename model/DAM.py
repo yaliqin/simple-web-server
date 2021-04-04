@@ -159,7 +159,7 @@ def pop_answers(indexs,question_text,question_number,all_data):
     #
 
 
-def model_interface(input,graph,model):
+def model_interface(input,graph,model,sess):
     SINGLEMODEL = 1
     return dam_output(input,SINGLEMODEL,graph,model,sess)
 

@@ -108,9 +108,10 @@ def test_with_model(conf, _model, _graph, predict_data):
     print(type(_model))
     print(_model)
     print(type(_graph))
+    print("\n")
     _graph = tf.compat.v1.get_default_graph()
 
-    with tf.compat.v1.get_default_session(graph=_graph) as sess:
+    with tf.compat.v1.get_default_session() as sess:
         for batch_index in range(test_batch_num):
             print(f"batch index is: {batch_index}")
             feed = {

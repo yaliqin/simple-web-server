@@ -175,7 +175,8 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
         key_words_list = ["input classification", "output", "context"]
         cls_indexs, question_text, answers_text,word_dict = prepare_data(data_path)
         for number, question in enumerate(question_text):
-            if question == input:
+            print(question)
+            if input in question == input:
                 print(input)
                 break
         print(f'the input question is: {input}')

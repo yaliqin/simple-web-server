@@ -178,6 +178,9 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
             if question == input:
                 print(input)
                 break
+        print(f'the input question is: {input}')
+        print(f"find the quesiton number is: {number}")
+        print(f'the question is: {question_text[number]}')
         question_number = [number]
         all_data,text_data_classified = prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,word_dict,key_words_list)
         indexs, answers = predict.test_with_model(conf,  model,graph,sess, text_data_classified)

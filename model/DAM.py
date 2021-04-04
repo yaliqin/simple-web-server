@@ -72,12 +72,13 @@ def load_model():
         with sess.as_default():
             # _model.init.run();
             # _model.saver = tf.train.import_meta_graph("init_meta")
-            print(tf.get_default_session())
+            print(tf.compat.v1.get_default_session())
             model.saver = tf.compat.v1.train.import_meta_graph(conf["init_meta"])
             print(model.saver)
             model.saver.restore(sess, conf["init_model"])
             print("sucess init %s" % conf["init_model"])
     print(sess)
+    print(tf.compat.v1.get_default_session())
     return model,graph
 
 

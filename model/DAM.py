@@ -166,7 +166,7 @@ def model_interface(input,graph,model,sess):
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(input,SINGLEMODEL,graph,model):
+def dam_output(input,SINGLEMODEL,graph,model,sess):
     # # define model class
     # model = net.Net(conf)
 

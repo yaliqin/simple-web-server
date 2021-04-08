@@ -179,7 +179,8 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
                 print(question[0])
                 print(type(question[0]))
             if question[0] == input:
-                print(input)
+                print(f'find the question equal to input:{input}')
+                print(f' the found number is: {number}')
                 break
         print(f'the input question type is {type(input)}')
         print(f'the input question is: {input}')

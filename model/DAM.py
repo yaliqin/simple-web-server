@@ -175,9 +175,13 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
         key_words_list = ["input classification", "output", "context"]
         cls_indexs, question_text, answers_text,word_dict = prepare_data(data_path)
         for number, question in enumerate(question_text):
+            if number == 0:
+                print(question[0])
+                print(type(question[0]))
             if question[0] == input:
                 print(input)
                 break
+        print(f'the input question type is {type(input)}')
         print(f'the input question is: {input}')
         print(f"find the quesiton number is: {number}")
         print(f'the question is: {question_text[number]}')

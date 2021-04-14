@@ -144,10 +144,12 @@ def build_qa_with_bilistm(question, answers):
     q_a_set = []
     for answer in answers:
         q = question
-        q.append('\t')
-        q_a = q + answer
+    #    q.append('\t')
+        q_a = q + '\t'+ answer
         positive_flag = '1' + '\t'
-        q_a.insert(0, positive_flag)
+        q_a = positive_flag + q_a
+        print(q_a)
+      #  q_a.insert(0, positive_flag)
         q_a_set.append(q_a)
     return q_a_set
 
@@ -172,11 +174,14 @@ def pop_answers(indexs,question_text,question_number,all_data):
 
 
 def model_interface(input,graph,model,sess):
+    print("enter the interface method")
     split_input = input.split("___SEP___")
     if len(split_input)==1:
         SINGLEMODEL = True
     else:
         SINGLEMODEL = False
+    print(split_input)
+    print(SINGLEMODEL)
     return dam_output(split_input,SINGLEMODEL,graph,model,sess)
 
 
@@ -214,13 +219,15 @@ def dam_output(split_input,SINGLEMODEL,graph,model,sess):
         answers = split_input[1].split("__EOS__")
         cls_indexs, question_text, answers_text, word_dict = prepare_data(data_path)
         print(f'question is:{question}')
+        print("the candidate answers are:\n")
+        print(answers)
         # questions = question
         q_a_set = build_qa_with_bilistm(question, answers)
         text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
         indexs, answers = predict.test_with_model(conf,  model, graph,sess,text_data_classified)
-        answer_data = q_a_set[indexs]
-        this_answer = answer_data.split('\t')[-1]
+        print(indexs)
         print(f'answer is: {this_answer}')
+        output = answers
     return output
 
 

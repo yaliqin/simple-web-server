@@ -122,13 +122,14 @@ def prepare_q_a_data(question_number,cls_indexs, question_text, answers_text,wor
 
 def find_question_answer(question, question_text,answers_text):
     for index,value in enumerate(question_text):
-        if question == value:
+        if question in value:
             select_answer = answers_text[index]
             return index, select_answer
 
 
 def build_bilstm_qa(questions,question_text,answers_text):
     q_a_set =[]
+
     for q in questions:
         index, a = find_question_answer(q, question_text,answers_text)
         q.append('\t')
@@ -138,6 +139,17 @@ def build_bilstm_qa(questions,question_text,answers_text):
         q_a_set.append(q_a)
     return q_a_set
 
+
+def build_qa_with_bilistm(question, answers):
+    q_a_set = []
+    for answer in answers:
+        q = question
+        q.append('\t')
+        q_a = q + answer
+        positive_flag = '1' + '\t'
+        q_a.insert(0, positive_flag)
+        q_a_set.append(q_a)
+    return q_a_set
 
 
 
@@ -160,18 +172,23 @@ def pop_answers(indexs,question_text,question_number,all_data):
 
 
 def model_interface(input,graph,model,sess):
-    SINGLEMODEL = 1
-    return dam_output(input,SINGLEMODEL,graph,model,sess)
+    split_input = input.split("___SEP___")
+    if len(split_input)==1:
+        SINGLEMODEL = True
+    else:
+        SINGLEMODEL = False
+    return dam_output(split_input,SINGLEMODEL,graph,model,sess)
 
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(input,SINGLEMODEL,graph,model,sess):
+def dam_output(split_input,SINGLEMODEL,graph,model,sess):
     # # define model class
     # model = net.Net(conf)
 
     # if no bilstm, should work out with the proposed answer by itself; otherwise, get the proposed answers from bilstm
-    if SINGLEMODEL == 1:
+    if SINGLEMODEL:
+        input = split_input
         key_words_list = ["input classification", "output", "context"]
         cls_indexs, question_text, answers_text,word_dict = prepare_data(data_path)
         for number, question in enumerate(question_text):
@@ -193,10 +210,12 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
         print(indexs)
         output = pop_answers(indexs,question_text,question_number,all_data)
     else:
+        question = split_input[0]
+        answers = split_input[1].split("__EOS__")
         cls_indexs, question_text, answers_text, word_dict = prepare_data(data_path)
-        print(f'question is:{input}')
-        questions = input
-        q_a_set = build_bilstm_qa(questions, question_text, answers_text)
+        print(f'question is:{question}')
+        # questions = question
+        q_a_set = build_qa_with_bilistm(question, answers)
         text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
         indexs, answers = predict.test_with_model(conf,  model, graph,sess,text_data_classified)
         answer_data = q_a_set[indexs]
@@ -207,7 +226,7 @@ def dam_output(input,SINGLEMODEL,graph,model,sess):
 
 if __name__ == '__main__':
     test_cls_indexs, test_question_text, test_answers_text, word_dict = prepare_data(data_path)
-    question = test_question_text[22]
+    question = "add nde___SEP___What do you mean by property?What do you mean by property?__EOS__The order of nodes at each level will be automatically sorted based on name (A-Z) after each action. The order doesn't affect test cases generation.__EOS__No. This feature will need to be developed.__EOS__There is no limit to the number of nodes you can create at each level. You can add nodes as needed__EOS__Do you want to zoom in or zoom out the tree?__EOS__Sure. You can choose to upload files or create online.__EOS__There is no limit. You can add child nodes as needed. \n__EOS__No.Also User should not use same login with currently with multiple browser.__EOS__No. Currently we do not have this facility.__EOS__There is no such limitationn."
     print(question)
     model,graph,sess=load_model()
     model_interface(question,model,graph,sess)

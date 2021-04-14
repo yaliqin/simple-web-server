@@ -67,13 +67,14 @@ def evaluate_result(data):
         prop_answers.append(proposed_answer)
 
     #sort_data = sorted(data, key=lambda x: x[0], reverse=True)
-    #print(data)
+    print(max_score_indexs)
+    print("the max score index")
     #score = data[:,0]
     #indexs = sorted(range(len(scores)), key=lambda k: score[k])
     #index = indexs[0]
     #return proposed_answer, index
 #    return(max_score_indexs,proposed_answer)
-    return max_score_indexs, prop_answers
+    return max_score_index, proposed_answer
 
 
 def test_with_model(conf, _model, _graph, sess, predict_data):

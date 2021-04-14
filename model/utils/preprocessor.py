@@ -158,7 +158,9 @@ def get_sequence_tokens_with_turn(corpus, word_dict):
 def update_vocab(word_dict, word):
     all_values = word_dict.values()
     max_value = max(all_values)
+    print(f'max_value is: {}')
     word_dict[word] = max_value+1
+    return word_dict
 
 def generate_train_valid_test_data(sequence_tokens):
     # input: sequence_tokens dictionary

@@ -223,7 +223,8 @@ def dam_output(split_input,SINGLEMODEL,graph,model,sess):
         print(answers)
         # questions = question
         q_a_set = build_qa_with_bilistm(question, answers)
-        text_data_classified = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
+        text_data_classified,word_dict = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
+
         indexs, answers = predict.test_with_model(conf,  model, graph,sess,text_data_classified)
         print(indexs)
         print(f'answer is: {this_answer}')

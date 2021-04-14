@@ -133,7 +133,12 @@ def get_sequence_tokens_with_turn(corpus, word_dict):
                 sequence_tokens['c'].append(context)
                 tokens = text_to_word_sequence(block)
                 for j, word in enumerate(tokens):
-                    tokens[j] = word_dict[word]
+                    if word in word_dict.keys():
+                        tokens[j] = word_dict[word]
+                    else:
+                        print("update word_dict")
+                        word_dict = update_vocab(word_dict, word)
+                        tokens[j] = word_dict[word]
                 sequence_tokens['r'].append(tokens)
             else:
                 tokens = text_to_word_sequence(block)
@@ -142,7 +147,13 @@ def get_sequence_tokens_with_turn(corpus, word_dict):
                 context.extend(tokens)
                 context.append(28270)
 
-    return sequence_tokens
+    return sequence_tokens,word_dict
+
+
+def update_vocab(word_dict, word):
+    all_values = word_dict.values()
+    max_value = max(all_values)
+    word_dict[word] = max_value+1
 
 def generate_train_valid_test_data(sequence_tokens):
     # input: sequence_tokens dictionary

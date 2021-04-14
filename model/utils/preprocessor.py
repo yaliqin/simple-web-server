@@ -143,7 +143,12 @@ def get_sequence_tokens_with_turn(corpus, word_dict):
             else:
                 tokens = text_to_word_sequence(block)
                 for j, word in enumerate(tokens):
-                    tokens[j] = word_dict[word]
+                    if word in word_dict.keys():
+                        tokens[j] = word_dict[word]
+                    else:
+                        print("update word_dict")
+                        word_dict = update_vocab(word_dict, word)
+                        tokens[j] = word_dict[word]
                 context.extend(tokens)
                 context.append(28270)
 

@@ -228,7 +228,7 @@ def dam_output(split_input,SINGLEMODEL,graph,model,sess):
         indexs, answers_encoded = predict.test_with_model(conf,  model, graph,sess,text_data_classified)
         print(indexs)
         print(f'answer is: {answers[indexs]}')
-        output = answers
+        output = answers[indexs]
     return output
 
 

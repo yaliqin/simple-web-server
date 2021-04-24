@@ -31,8 +31,10 @@ conf = {
     "save_path": result_path,
     #"init_model":"/home/ally/DAM/output/ubuntu/DAM/DAM.ckpt",
     #"init_meta":"/home/ally/DAM/output/ubuntu/DAM/DAM.ckpt.meta",
-    "init_model":model_folder+"model.ckpt.21.0", # for local machine test
-    "init_meta":model_folder+"model.ckpt.21.0.meta",
+    # "init_model":model_folder+"model.ckpt.21.0", # for local machine test
+    # "init_meta":model_folder+"model.ckpt.21.0.meta",
+    "init_model":"/home/ally/github/chatbot/models/DAM/results/model.ckpt.10.0",
+    "init_meta":"/home/ally/github/chatbot/models/DAM/results/model.ckpt.10.0.meta",
 
     "rand_seed": None,
 

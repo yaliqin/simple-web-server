@@ -7,6 +7,8 @@ app = Flask(__name__)
 model,graph,sess = load_model()
 print(f'sess in app:{sess}')
 
+bilstm_response_data = read_csv_file("response_data.csv")
+
 @app.route('/')
 def hello():
     return "Simple Web Server!"
@@ -16,7 +18,7 @@ def hello():
 def get_answer():
     input = request.get_json()
     question = input['question']
-    return jsonify({"answer": model_interface(question,graph, model,sess)})
+    return jsonify({"answer": model_interface(question,graph, model,sess,bilstm_response_data)})
 
 
 if __name__ == '__main__':

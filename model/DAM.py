@@ -1,6 +1,7 @@
 import os
 import time
 import tensorflow as tf
+import csv
 
 # disable tensorflow debug information
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -142,17 +143,49 @@ def build_bilstm_qa(questions,question_text,answers_text):
     return q_a_set
 
 
-def build_qa_with_bilistm(question, answers):
+def read_csv_file(data_csv):
+    # input: tab delimited txt file
+    # output: corpus list[str]
+    corpus = []
+    with open(data_csv, 'r') as read_obj:
+        csv_reader = reader(read_obj)
+        header = next(csv_reader)
+        # Check file as empty
+        if header != None:
+            # Iterate over each row after the header in the csv
+            for index, row in enumerate(csv_reader):
+                if index%2 == 0:
+                    corpus.append(row[0]+'\t'+row[1]+"\n")
+                else:
+                    corpus.append(row[0] + '\t' + row[1])
+
+    return corpus
+
+def append_csv_file(w_csv, row):
+    with open(w_csv,'a') as f:
+        writer = csv.writer(f)
+        writer.writerow(row)
+
+
+def build_qa_with_bilistm(question, answers,build_qa_with_bilistm):
     q_a_set = []
     for answer in answers:
         q = question
     #    q.append('\t')
         q_a = q + '\t'+ answer
-        positive_flag = '1' + '\t'
+        if question in build_qa_with_bilistm:
+            if answer == build_qa_with_bilistm[question]:
+                positive_flag ='1' + '\t'
+            else:
+                positive_flag = '0' + '\t'
+        else:
+            positive_flag = '0' + '\t'
         q_a = positive_flag + q_a
         print(q_a)
       #  q_a.insert(0, positive_flag)
         q_a_set.append(q_a)
+    append_csv_file("bilstm_out.csv",q_a_set)
+
     return q_a_set
 
 
@@ -175,7 +208,7 @@ def pop_answers(indexs,question_text,question_number,all_data):
     #
 
 
-def model_interface(input,graph,model,sess):
+def model_interface(input,graph,model,sess,bilstm_response_data):
     print("enter the interface method")
     split_input = input.split("___SEP___")
     if len(split_input)==1:
@@ -184,12 +217,12 @@ def model_interface(input,graph,model,sess):
         SINGLEMODEL = False
     print(split_input)
     print(SINGLEMODEL)
-    return dam_output(split_input,SINGLEMODEL,graph,model,sess)
+    return dam_output(split_input,SINGLEMODEL,graph,model,sess,bilstm_response_data)
 
 
 # Customize your model logic here. Feel free to change the function name.
 # Customize your model logic here. Feel free to change the function name.
-def dam_output(split_input,SINGLEMODEL,graph,model,sess):
+def dam_output(split_input,SINGLEMODEL,graph,model,sess,bilstm_response_data):
     # # define model class
     # model = net.Net(conf)
 
@@ -224,7 +257,7 @@ def dam_output(split_input,SINGLEMODEL,graph,model,sess):
         print("the candidate answers are:\n")
         print(answers)
         # questions = question
-        q_a_set = build_qa_with_bilistm(question, answers)
+        q_a_set = build_qa_with_bilistm(question, answers,bilstm_response_data)
         text_data_classified,word_dict = preprocessor.get_sequence_tokens_with_turn(q_a_set, word_dict)
 
         indexs, answers_encoded = predict.test_with_model(conf,  model, graph,sess,text_data_classified)
